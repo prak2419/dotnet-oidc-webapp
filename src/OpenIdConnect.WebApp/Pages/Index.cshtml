@@ -1,0 +1,23 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="row justify-content-center">
+    <div class="col">
+        <h1 class="display-4">About</h1>
+        <p>
+            This is a simple <a href="https://docs.microsoft.com/aspnet/core">ASP.NET Core application</a> to test Open
+            ID Connect integration based on <a href="https://github.com/AzureAD/microsoft-identity-web">Microsoft
+                Identity Web</a>.
+        </p>
+        <p>Use the "Sign In" and "Sign Out" links in the navigation bar to sign in or sign out of the application.</p>
+        <p>The <a asp-area="" asp-page="/Claims">Claims</a> page shows the claims contained in the current
+            <code>id_token</code> availabe to the application through Open ID Connect. This page enforces authentication
+        </p>
+        <p>The <a asp-area="" asp-page="/Echo">HTPP Echo</a> shows HTTP request information and what client connection
+            information ASP.NET Core sees (e.g. IP address or protocol).
+            This is useful for analyzing issues in a reverse proxy setup.</p>
+    </div>
+</div>

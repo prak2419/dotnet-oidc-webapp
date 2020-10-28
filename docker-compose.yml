@@ -1,0 +1,24 @@
+# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP .NET Core service.
+
+version: '3.4'
+
+services:
+  oidc-webapp:
+    image: dotnet-samples/openidconnect:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: src/OpenIdConnect.WebApp/Dockerfile
+    ports:
+      - 5000:5000
+      - 5001:5001
+      - 5050:5050
+    environment:
+      - ASPNETCORE_URLS=http://*:5000;https://*:5001;http://*:5050
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=${PFX_PASSWORD}
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/${PFX_FILE:-devcert.pfx}
+      - Health__ProbePort=5050
+      - AzureAd__Domain=${AAD_DOMAIN}
+      - AzureAd__TenantId=${AAD_TENANT_ID}
+      - AzureAd__ClientId=${AAD_CLIENT_ID}
+    volumes:
+      - ~/.aspnet/https:/https:ro

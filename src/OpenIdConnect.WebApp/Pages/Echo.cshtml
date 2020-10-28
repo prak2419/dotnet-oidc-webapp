@@ -1,0 +1,54 @@
+﻿@page
+@model EchoModel
+@{
+    ViewData["Title"] = "HTTP Echo";
+}
+<div class="row justify-content-center">
+    <div class="col">
+        <h1>Request Properties</h1>
+        <div class="table-responsive">
+            <table class="table table-sm table-striped">
+                <thead>
+                    <tr>
+                        <th>HttpContext Property</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Connection.RemoteIpAddress (X-Forwarded-For)</td>
+                        <td>@HttpContext.Connection.RemoteIpAddress</td>
+                    </tr>
+                    <tr>
+                        <td>Request.Scheme (X-Forwarded-Proto)</td>
+                        <td>@HttpContext.Request.Scheme</td>
+                    </tr>
+                    <tr>
+                        <td>Request.Host (X-Forwarded-Host)</td>
+                        <td>@HttpContext.Request.Host</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <h1 class="mt-4">HTTP Headers</h1>
+        <div class="table-responsive">
+            <table class="table table-sm table-striped">
+                <thead>
+                    <tr>
+                        <th>Header</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var header in Request.Headers)
+                    {
+                        <tr>
+                            <td>@header.Key</td>
+                            <td>@header.Value</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
