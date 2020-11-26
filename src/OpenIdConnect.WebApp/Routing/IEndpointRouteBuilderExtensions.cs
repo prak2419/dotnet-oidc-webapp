@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 
-namespace OpenIdConnect.WebApp
+namespace OpenIdConnect.WebApp.Routing
 {
     public static class IEndpointRouteBuilderExtensions
     {
