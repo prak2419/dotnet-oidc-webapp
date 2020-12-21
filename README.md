@@ -45,11 +45,11 @@ Simple OpenID Connect test application
 
 ### Generate self-signed root and server certificates or use the certificates available in the certs folder.
 
-    ```https://docs.microsoft.com/en-us/azure/application-gateway/self-signed-certificates```
+    https://docs.microsoft.com/en-us/azure/application-gateway/self-signed-certificates
 
    Create a PFX certificate to use for the backend servers
 
-    ```openssl pkcs12 -export -out .\certs\fabrikam.pfx -in .\certs\fabrikam.crt -inkey .\certs\fabrikam.key -certfile .\certs\contoso_original.crt```
+    openssl pkcs12 -export -out .\certs\fabrikam.pfx -in .\certs\fabrikam.crt -inkey .\certs\fabrikam.key -certfile .\certs\contoso_original.crt
 
 ### Deploy the network, ACR, MI, AKS, Private DNS Zone using the powershell script ```Deploy-AksAadApp.ps1```.
 
@@ -59,11 +59,11 @@ Simple OpenID Connect test application
     
 ### Deploy a private ingress controller in a namespace "ingress-basic"
 
-   #### Create a namespace for ingress controller
+   #### > Create a namespace for ingress controller
    
          kubectl create namespace ingress-basic
 
-   #### Create a file ingress_internal.yaml with the below specs
+   #### > Create a file ingress_internal.yaml with the below specs
     
             controller:
               service:
@@ -71,7 +71,7 @@ Simple OpenID Connect test application
                 annotations:
                   service.beta.kubernetes.io/azure-load-balancer-internal: "true"
           
-   #### Deploy the helm repo for ```nginx``` ingress controller
+   #### > Deploy the helm repo for ```nginx``` ingress controller
         
         helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
  
