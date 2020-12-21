@@ -108,12 +108,12 @@ Simple OpenID Connect test application
     
         ```(.*)redirect_uri=https%3A%2F%2Fwww.fabrikam\.com(.*)$```
      
-        []!(https://raw.githubusercontent.com/prak2419/MyLASolution01/master/AppGW_Condition.jpg)
+        ![](https://raw.githubusercontent.com/prak2419/MyLASolution01/master/AppGW_Condition.jpg)
      
    2. Action
     
         ```{http_resp_Location_1}redirect_uri=https%3A%2F%2F<GW_FQDN>{http_resp_Location_2}```
         
-        []!(https://raw.githubusercontent.com/prak2419/MyLASolution01/master/AppGW_action.jpg)
+        ![](https://raw.githubusercontent.com/prak2419/MyLASolution01/master/AppGW_action.jpg)
 
 
