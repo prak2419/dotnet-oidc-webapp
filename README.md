@@ -6,8 +6,8 @@ Simple OpenID Connect test application
 1.	App Gateway VNET peered with AKS VNET
 2.	A user assigned managed identity with contributor role on the AKS cluster resource group. The least permission would be “Network Contributor” but needs further testing to confirm.
 3.	SP with reply URL as below and "id_token" enabled,
-    a.	https://<appGWFQDN>
-    b.	https://<appGWFQDN>/signin-oidc/
+    a. https://<appGWFQDN>  
+    b. https://<appGWFQDN>/signin-oidc/  
  
 4.	Self-signed root certificate and server certificate (Root- ```www.contoso.com```, server - ```www.fabrikam.com```)
 
@@ -92,9 +92,9 @@ Simple OpenID Connect test application
  
 ### Deploy the application after modifying the parameters in the app.yaml file
 
-   AzureAd__Domain: <YOUR-AAD-DOMAIN>
-   AzureAd__TenantId: <YOUR-AAD-TENANT-ID>
-   AzureAd__ClientId: <YOUR-AAD-CLIENT-ID>
+   AzureAd__Domain: <YOUR-AAD-DOMAIN>  
+   AzureAd__TenantId: <YOUR-AAD-TENANT-ID>  
+   AzureAd__ClientId: <YOUR-AAD-CLIENT-ID>  
 
     kubectl apply -f app.yaml -n dotnetapp
     
