@@ -43,11 +43,11 @@ Simple OpenID Connect test application
 
     ```./acr-build.sh```
 
-### Generate self-signed root and server certificates or use the certificates available in the certs folder
-    
+### Generate self-signed root and server certificates or use the certificates available in the certs folder.
+
     ```https://docs.microsoft.com/en-us/azure/application-gateway/self-signed-certificates```
 
-    Create a PFX certificate to use for the backend servers
+   Create a PFX certificate to use for the backend servers
 
     ```openssl pkcs12 -export -out .\certs\fabrikam.pfx -in .\certs\fabrikam.crt -inkey .\certs\fabrikam.key -certfile .\certs\contoso_original.crt```
 
@@ -55,65 +55,61 @@ Simple OpenID Connect test application
 
 ### Authenticate to the AKS cluster,
 
-    ```az aks get-credentials -n <aks_cluster_name> -g <aks_cluster_RG>```
+    az aks get-credentials -n <aks_cluster_name> -g <aks_cluster_RG>
     
 ### Deploy a private ingress controller in a namespace "ingress-basic"
 
-    #### Create a namespace for ingress controller
-         ```kubectl create namespace ingress-basic```
+   #### Create a namespace for ingress controller
+   
+         kubectl create namespace ingress-basic
 
-    #### Create a file ingress_internal.yaml with the below specs
+   #### Create a file ingress_internal.yaml with the below specs
     
-         ```
             controller:
               service:
                 loadBalancerIP: 10.58.1.70 #IP address from the subnet
                 annotations:
                   service.beta.kubernetes.io/azure-load-balancer-internal: "true"
           
-          ```
-    #### Deploy the helm repo for ```nginx``` ingress controller
+   #### Deploy the helm repo for ```nginx``` ingress controller
         
-        ```helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx```
+        helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
  
-        ```
-           helm install nginx-ingress ingress-nginx/ingress-nginx \
+        helm install nginx-ingress ingress-nginx/ingress-nginx \
              --namespace ingress-basic \
              -f ingress_internal.yaml \
              --set controller.replicaCount=2 \
              --set controller.nodeSelector."beta\.kubernetes\.io/os"=linux \
              --set defaultBackend.nodeSelector."beta\.kubernetes\.io/os"=linux
-          
-          ```
  
 ### Create a namespace for the application
  
-    ```kubectl create ns dotnetapp```
+    kubectl create ns dotnetapp
  
 ### Create a secret with the self-signed cert
  
-    ```kubectl create secret tls fabrikam-tls --key fabrikam.key --cert fabrikam.crt -n dotnetapp```
+    kubectl create secret tls fabrikam-tls --key fabrikam.key --cert fabrikam.crt -n dotnetapp
  
 ### Deploy the application after modifying the parameters in the app.yaml file
 
-    AzureAd__Domain: <YOUR-AAD-DOMAIN>
-    AzureAd__TenantId: <YOUR-AAD-TENANT-ID>
-    AzureAd__ClientId: <YOUR-AAD-CLIENT-ID>
+   AzureAd__Domain: <YOUR-AAD-DOMAIN>
+   AzureAd__TenantId: <YOUR-AAD-TENANT-ID>
+   AzureAd__ClientId: <YOUR-AAD-CLIENT-ID>
 
-    ```kubectl apply -f app.yaml -n dotnetapp```
+    kubectl apply -f app.yaml -n dotnetapp
     
 ### Change the IP address of the A record created for www.fabrikam.com with nginx ingress controller external IP.
 
-    ```kubectl get svc nginx-ingress-ingress-nginx-controller -n ingress-basic -o jsonpath='{.spec.loadBalancerIP}'```
+    kubectl get svc nginx-ingress-ingress-nginx-controller -n ingress-basic -o jsonpath='{.spec.loadBalancerIP}'
     
 ### Create a rewrite rule in the app gateway to rewrite the header ```Location```
 
-    1. Condition
+   1. Condition
     
         ```(.*)redirect_uri=https%3A%2F%2Fwww.fabrikam\.com(.*)$```
         
      
-    2. Action
+   2. Action
     
         ```{http_resp_Location_1}redirect_uri=https%3A%2F%2F<GW_FQDN>{http_resp_Location_2}```
 
