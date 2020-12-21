@@ -19,6 +19,8 @@
 **/node_modules
 **/npm-debug.log
 **/obj
+**/certs
+**/Deploy-AksAadApp.ps1
 **/secrets.dev.yaml
 **/values.dev.yaml
 README.md
