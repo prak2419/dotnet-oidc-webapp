@@ -5,7 +5,7 @@ Simple OpenID Connect test application
 
 1.	App Gateway VNET peered with AKS VNET
 2.	A user assigned managed identity with contributor role on the AKS cluster resource group. The least permission would be “Network Contributor” but needs further testing to confirm.
-3.	SP with reply URL as below and "id_token" enabled,
+3.	SP with reply URL as below and "id_token" enabled,  
     a. https://<appGWFQDN>  
     b. https://<appGWFQDN>/signin-oidc/  
  
@@ -98,7 +98,7 @@ Simple OpenID Connect test application
 
     kubectl apply -f app.yaml -n dotnetapp
     
-### Change the IP address of the A record created for www.fabrikam.com with nginx ingress controller external IP.
+### Change the IP address of the A record created for ```www.fabrikam.com``` with nginx ingress controller external IP.
 
     kubectl get svc nginx-ingress-ingress-nginx-controller -n ingress-basic -o jsonpath='{.spec.loadBalancerIP}'
     
